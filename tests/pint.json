@@ -1,0 +1,78 @@
+{
+    "preset": "laravel",
+    "exclude": [
+        "vendor"
+    ],
+    "rules": {
+        "no_unused_imports": true,
+        "ordered_imports": {
+            "sort_algorithm": "alpha"
+        },
+        "single_import_per_statement": true,
+        "no_empty_statement": true,
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filament v3 → v4 Namespace Normalization
+        |--------------------------------------------------------------------------
+        */
+
+        "class_reference_replace": [
+            {
+                "search": "Filament\\\\Resources\\\\Forms\\\\Components",
+                "replace": "Filament\\\\Forms\\\\Components"
+            },
+            {
+                "search": "Filament\\\\Resources\\\\Tables\\\\Columns",
+                "replace": "Filament\\\\Tables\\\\Columns"
+            },
+            {
+                "search": "Filament\\\\Resources\\\\Form",
+                "replace": "Filament\\\\Forms\\\\Form"
+            },
+            {
+                "search": "Filament\\\\Resources\\\\Table",
+                "replace": "Filament\\\\Tables\\\\Table"
+            },
+            {
+                "search": "Filament\\\\Infolists",
+                "replace": "Filament\\\\Infolists"
+            }
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Action class consolidation: Everything → Filament\Actions
+        |--------------------------------------------------------------------------
+        */
+
+        "regex_replace": [
+            {
+                "pattern": "/\\\\?Filament\\\\\\\\(Tables|Forms)\\\\\\\\(.*)Action/",
+                "replacement": "Filament\\\\Actions\\\\$2Action"
+            },
+            {
+                "pattern": "/(FormAction|TableAction|BulkAction|HeaderAction)/",
+                "replacement": "Action"
+            }
+        ],
+
+        /*
+        |--------------------------------------------------------------------------
+        | Schema replacement
+        | Converts ->form([...]) → ->schema([...]) but leaves inner arrays intact
+        |--------------------------------------------------------------------------
+        */
+
+        "schema_conversion": [
+            {
+                "pattern": "/->form\\s*\\(/",
+                "replacement": "->schema("
+            },
+            {
+                "pattern": "/->infolist\\s*\\(/",
+                "replacement": "->schema("
+            }
+        ]
+    }
+}
