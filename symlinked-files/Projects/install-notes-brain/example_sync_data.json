@@ -1,0 +1,115 @@
+{
+  "generated_at": "2024-11-26T02:30:00.000000",
+  "total_projects": 2,
+  "projects": [
+    {
+      "project_data": {
+        "name": "photography-gallery",
+        "description": "Client gallery system for delivering final photos with password protection, download options, and print ordering integration using Stripe payments.",
+        "color": "#f05340"
+      },
+      "note_data": {
+        "title": "photography-gallery [Analysis]",
+        "type": "mixed",
+        "content": "# photography-gallery\n\n## Purpose\nClient gallery system for delivering final photos with password protection, download options, and print ordering integration using Stripe payments.\n\n## Business Context\n**Type**: client-facing\n**Category**: web-apps\n\n## Original Location\n`/Users/dave/Code/PhotoGallery2023`\n\n## Project Metrics\n- **Files**: 847\n- **Size**: 45M\n- **Last Modified**: 2024-11-15\n\n## Tech Stack\nlaravel, vue, mysql, stripe, redis\n\n## Git Information\n- **Remote**: git@github.com:dave/photo-gallery.git\n- **Branch**: main\n- **Has uncommitted changes**: No\n\n## Documentation Excerpt\n```\n# Photography Gallery\n\nA modern Laravel application for managing and displaying photography portfolios.\n\n## Features\n- Image upload and management\n- Client galleries with password protection\n- Watermarking and image processing\n- Responsive design for mobile viewing\n- Stripe integration for print orders\n```\n",
+        "code_content": "{\n  \"original_path\": \"/Users/dave/Code/PhotoGallery2023\",\n  \"analyzed_at\": \"2024-11-26T02:15:00Z\",\n  \"tech_stack\": {\n    \"detected_types\": [\n      \"laravel\",\n      \"php\",\n      \"vue\",\n      \"docker\"\n    ],\n    \"ai_identified\": [\n      \"laravel\",\n      \"vue\",\n      \"mysql\",\n      \"stripe\",\n      \"redis\"\n    ]\n  },\n  \"git\": {\n    \"branch\": \"main\",\n    \"remote\": \"git@github.com:dave/photo-gallery.git\",\n    \"has_uncommitted_changes\": false\n  },\n  \"metrics\": {\n    \"file_count\": 847,\n    \"size\": \"45M\",\n    \"last_modified\": \"2024-11-15\"\n  },\n  \"tree_structure\": \"PhotoGallery2023/\\n├── app/\\n│   ├── Http/\\n│   ├── Models/\\n│   └── Services/\\n├── resources/\\n│   ├── js/\\n│   └── views/\\n├── public/\\n├── routes/\\n└── tests/\",\n  \"ai_confidence\": \"high\"\n}"
+      },
+      "tags": [
+        {
+          "name": "laravel",
+          "color": "#f05340",
+          "is_flag": false
+        },
+        {
+          "name": "vue",
+          "color": "#42b883",
+          "is_flag": false
+        },
+        {
+          "name": "mysql",
+          "color": "#6b7280",
+          "is_flag": false
+        },
+        {
+          "name": "stripe",
+          "color": "#6b7280",
+          "is_flag": false
+        },
+        {
+          "name": "redis",
+          "color": "#6b7280",
+          "is_flag": false
+        },
+        {
+          "name": "client-facing",
+          "color": "#8b5cf6",
+          "is_flag": false
+        },
+        {
+          "name": "web-apps",
+          "color": "#3b82f6",
+          "is_flag": false
+        }
+      ],
+      "flags": [
+        {
+          "name": "revenue-generating",
+          "color": "#fbbf24",
+          "is_flag": true
+        },
+        {
+          "name": "production",
+          "color": "#10b981",
+          "is_flag": true
+        },
+        {
+          "name": "client-facing",
+          "color": "#8b5cf6",
+          "is_flag": true
+        }
+      ]
+    },
+    {
+      "project_data": {
+        "name": "backup-automation",
+        "description": "Bash script for automated backup of photography files to external drives and cloud storage with incremental backup support and email notifications.",
+        "color": "#4eaa25"
+      },
+      "note_data": {
+        "title": "backup-automation [Analysis]",
+        "type": "mixed",
+        "content": "# backup-automation\n\n## Purpose\nBash script for automated backup of photography files to external drives and cloud storage with incremental backup support and email notifications.\n\n## Business Context\n**Type**: automation\n**Category**: scripts\n\n## Original Location\n`/Users/dave/Scripts/backup_script`\n\n## Project Metrics\n- **Files**: 3\n- **Size**: 24K\n- **Last Modified**: 2024-10-20\n\n## Tech Stack\nbash\n\n## Git Information\n- No git repository\n\n## Documentation Excerpt\n```\n#!/bin/bash\n# Photography Backup Automation\n# Backs up RAW files and exports to multiple destinations\n\n# Configuration\nSOURCE_DIR=\"/Volumes/Photography\"\nBACKUP_DRIVES=(\"/Volumes/Backup1\" \"/Volumes/Backup2\")\nCLOUD_DIR=\"~/Dropbox/PhotoBackups\"\n```\n",
+        "code_content": "{\n  \"original_path\": \"/Users/dave/Scripts/backup_script\",\n  \"analyzed_at\": \"2024-11-26T02:15:00Z\",\n  \"tech_stack\": {\n    \"detected_types\": [\n      \"bash\"\n    ],\n    \"ai_identified\": [\n      \"bash\"\n    ]\n  },\n  \"git\": {},\n  \"metrics\": {\n    \"file_count\": 3,\n    \"size\": \"24K\",\n    \"last_modified\": \"2024-10-20\"\n  },\n  \"tree_structure\": \"backup_script/\\n├── backup.sh\\n├── config.conf\\n└── README.md\",\n  \"ai_confidence\": \"high\"\n}"
+      },
+      "tags": [
+        {
+          "name": "bash",
+          "color": "#4eaa25",
+          "is_flag": false
+        },
+        {
+          "name": "automation",
+          "color": "#8b5cf6",
+          "is_flag": false
+        },
+        {
+          "name": "scripts",
+          "color": "#3b82f6",
+          "is_flag": false
+        }
+      ],
+      "flags": [
+        {
+          "name": "high-priority",
+          "color": "#ef4444",
+          "is_flag": true
+        },
+        {
+          "name": "production",
+          "color": "#10b981",
+          "is_flag": true
+        }
+      ]
+    }
+  ]
+}

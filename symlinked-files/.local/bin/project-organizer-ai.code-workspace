@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../.project_data"
+		},
+		{
+			"path": "../../../Shared/Projects/project-organizer"
+		}
+	],
+	"settings": {}
+}
