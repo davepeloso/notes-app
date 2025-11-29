@@ -140,11 +140,8 @@ class NoteResource extends Resource
                     ->badge()
                     ->color(fn ($record) => $record->project?->color ?? 'gray'),
 
-                Tables\Columns\TextColumn::make("tags.name")
-                    ->badge()
-                    ->separator(',')
-                    ->color(fn ($record, $state) => $record->tags->firstWhere('name', $state)?->color ?? 'gray')
-                    ->limit(3),
+                Tables\Columns\ViewColumn::make('tags')
+                    ->view('filament.tables.columns.tag-badges'),
 
                 Tables\Columns\TextColumn::make("updated_at")
                     ->dateTime()

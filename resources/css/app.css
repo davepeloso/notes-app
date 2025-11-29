@@ -14,6 +14,20 @@
 :root {
     --font-heading: "Raleway", "Stack Sans Notch", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     --font-body: "Stack Sans Notch", "Raleway", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    /* Site-wide primary color palette (Amber) so Filament .fi-color-primary picks it up */
+    /* Tailwind Amber palette mapped to Filament primary tokens */
+    --primary-50:  #fffbeb;
+    --primary-100: #fef3c7;
+    --primary-200: #fde68a;
+    --primary-300: #fcd34d;
+    --primary-400: #fbbf24;
+    --primary-500: #f59e0b; /* selected color */
+    --primary-600: #d97706;
+    --primary-700: #b45309;
+    --primary-800: #92400e;
+    --primary-900: #78350f;
+    --primary-950: #451a03;
 }
 
 /* Global font styles */
@@ -39,4 +53,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .font-ultralight {
     font-weight: 200;
+}
+
+/* Backward compat: support literal class names like .fi-color-#f59e0b used in markup */
+.fi-badge.fi-color.fi-color-\#f59e0b,
+.fi-sc-text.fi-color.fi-color-\#f59e0b {
+    /* Supply the color variables Filament expects when a color is applied */
+    --color-50:  color-mix(in srgb, #f59e0b 12%, white);
+    --color-100: color-mix(in srgb, #f59e0b 20%, white);
+    --color-200: color-mix(in srgb, #f59e0b 30%, white);
+    --color-300: color-mix(in srgb, #f59e0b 45%, white);
+    --color-400: color-mix(in srgb, #f59e0b 60%, white);
+    --color-500: #f59e0b;
+    --color-600: #b45309;
+    --color-700: #92400e;
+    --color-800: #78350f;
+    --color-900: #451a03;
+    --color-950: #2a1202;
+
+    /* Text contrast for light/dark */
+    --text: #1f1300;
+    --dark-text: #ffffff;
 }

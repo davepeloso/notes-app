@@ -51,12 +51,9 @@ class RecentNotesWidget extends BaseWidget
                     ->color(fn (Note $record) => $record->project?->color ?? 'gray')
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('tags.name')
+                Tables\Columns\ViewColumn::make('tags')
                     ->label('Tags')
-                    ->badge()
-                    ->separator(',')
-                    ->color(fn (Note $record, string $state) => $record->tags->firstWhere('name', $state)?->color ?? 'gray')
-                    ->limit(3),
+                    ->view('filament.tables.columns.tag-badges'),
 
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Last Updated')
