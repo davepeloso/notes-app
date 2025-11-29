@@ -31,6 +31,8 @@ class AdminPanelProvider extends PanelProvider
             ->path("admin")
             ->login()
             ->darkMode(true)
+            // Set the admin sidebar width to 200px (was 320px by default ~ 20rem)
+            ->sidebarWidth('200px')
             ->colors([
                 "primary" => Color::Amber,
             ])
