@@ -30,6 +30,8 @@ class AdminPanelProvider extends PanelProvider
             ->id("admin")
             ->path("admin")
             ->login()
+            // Disable global search bar in the header
+            ->globalSearch(false)
             ->darkMode(true)
             // Set the admin sidebar width to 200px (was 320px by default ~ 20rem)
             ->sidebarWidth('200px')
