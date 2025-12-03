@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Actions\ManageProjectPageAction;
 use App\Models\Project;
 use BackedEnum;
 use Filament\Actions;
@@ -61,14 +62,10 @@ class ProjectResource extends Resource
             ])
             ->filters([])
             ->actions([
-                Actions\Action::make('edit')
-                    ->url(fn ($record) => static::getUrl('edit', ['record' => $record]))
-                    ->icon('heroicon-o-pencil'),
-                Actions\Action::make('delete')
-                    ->requiresConfirmation()
-                    ->action(fn ($record) => $record->delete())
-                    ->icon('heroicon-o-trash')
-                    ->color('danger'),
+                ManageProjectPageAction::viewPageAction(),
+                ManageProjectPageAction::make(),
+                ManageProjectPageAction::deletePageAction(),
+                Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Actions\BulkAction::make('delete')

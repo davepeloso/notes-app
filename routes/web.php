@@ -21,3 +21,5 @@ Route::get('/notes/{note}/monaco', [MonacoNoteController::class, 'edit'])
 
 Route::post('/notes/{note}/monaco', [MonacoNoteController::class, 'update'])
     ->name('notes.monaco.update');
+
+require __DIR__ . '/project-pages.php';
