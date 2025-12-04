@@ -2,10 +2,11 @@
 
 namespace App\Filament\Resources\ProjectResource\RelationManagers;
 
-use App\Filament\Forms\Components\MarkdownEditor;
+use App\Filament\Forms\Components\ModalMarkdownEditor;
 use App\Filament\Forms\Components\PhpEditor;
 use App\Models\Tag;
 use Filament\Actions;
+use Filament\Facades\Filament;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Components as SchemaComponents;
 use Filament\Schemas\Components\Utilities\Get;
@@ -66,7 +67,7 @@ class NotesRelationManager extends RelationManager
 
             SchemaComponents\Section::make('Content')
                 ->schema([
-                    MarkdownEditor::make('content')
+                    ModalMarkdownEditor::make('content')
                         ->label('Markdown')
                         ->visible(fn (Get $get) => in_array($get('type'), ['markdown', 'mixed'])),
 
@@ -107,10 +108,28 @@ class NotesRelationManager extends RelationManager
             ])
             ->filters([])
             ->headerActions([
-                Actions\CreateAction::make(),
+                Actions\CreateAction::make()
+                    ->afterFormMounted(function () {
+                        Filament::registerScripts([
+                            'https://unpkg.com/easymde/dist/easymde.min.js',
+                            'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
+                        ], true);
+                        Filament::registerStyles([
+                            'https://unpkg.com/easymde/dist/easymde.min.css',
+                        ], true);
+                    }),
             ])
             ->actions([
-                Actions\EditAction::make(),
+                Actions\EditAction::make()
+                    ->afterFormMounted(function () {
+                        Filament::registerScripts([
+                            'https://unpkg.com/easymde/dist/easymde.min.js',
+                            'https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js',
+                        ], true);
+                        Filament::registerStyles([
+                            'https://unpkg.com/easymde/dist/easymde.min.css',
+                        ], true);
+                    }),
                 Actions\Action::make('code')
                     ->label('Code')
                     ->color('info')
