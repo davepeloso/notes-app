@@ -10,6 +10,7 @@ use Filament\Forms\Components as FormComponents;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
+use App\Filament\Resources\ProjectResource\RelationManagers\NotesRelationManager;
 use UnitEnum;
 
 class ProjectResource extends Resource
@@ -82,6 +83,16 @@ class ProjectResource extends Resource
             'index' => Pages\ProjectResource\ListProjects::route('/'),
             'create' => Pages\ProjectResource\CreateProject::route('/create'),
             'edit' => Pages\ProjectResource\EditProject::route('/{record}/edit'),
+        ];
+    }
+
+    /**
+     * Register relation managers displayed on the Project edit page.
+     */
+    public static function getRelations(): array
+    {
+        return [
+            NotesRelationManager::class,
         ];
     }
 }

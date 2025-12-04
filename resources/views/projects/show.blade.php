@@ -26,6 +26,7 @@
         .stagger-2 { animation-delay: 0.2s; opacity: 0; }
         .stagger-3 { animation-delay: 0.3s; opacity: 0; }
         .stagger-4 { animation-delay: 0.4s; opacity: 0; }
+        .stagger-5 { animation-delay: 0.5s; opacity: 0; }
 
         .gradient-border {
             position: relative;
@@ -75,13 +76,13 @@
     </style>
 </head>
 <body class="min-h-screen w-full relative overflow-x-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-    
+
     <!-- Decorative gradient overlay -->
     <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,_rgba(63,41,121,0.4)_0%,_transparent_50%)]"></div>
     <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(94,163,255,0.2)_0%,_transparent_50%)]"></div>
 
     <main class="max-w-6xl mx-auto px-6 py-16">
-        
+
         <!-- Back button -->
         <div class="mb-8 fade-up stagger-1">
             <a href="{{ url('/admin/projects') }}" class="inline-flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
@@ -97,7 +98,7 @@
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-4">
                 {{ $project->name }}
             </h1>
-            
+
             @if($project->description)
                 <p class="text-xl text-slate-300 max-w-3xl">
                     {{ $project->description }}
@@ -120,7 +121,7 @@
         <!-- Project Metadata Card -->
         <article class="gradient-border rounded-2xl p-8 md:p-12 mb-8 fade-up stagger-3 backdrop-blur-sm">
             <div class="grid md:grid-cols-3 gap-8">
-                
+
                 <!-- Icon/Visual -->
                 <div class="flex justify-center md:justify-start items-center">
                     <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -141,6 +142,13 @@
                         <div>
                             <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Context</h3>
                             <p class="text-slate-300 text-sm">{{ $project->context }}</p>
+                        </div>
+                    @endif
+
+                    @if($project->description)
+                        <div>
+                            <h3 class="text-sm font-medium text-slate-400 uppercase tracking-wider mb-1">Description</h3>
+                            <p class="text-slate-300 text-sm whitespace-pre-line">{{ $project->description }}</p>
                         </div>
                     @endif
 
@@ -177,9 +185,60 @@
             </article>
         @endif
 
+        <!-- Project Notes -->
+        @if($project->notes && $project->notes->count() > 0)
+            <article class="gradient-border rounded-2xl p-8 md:p-12 mb-8 fade-up stagger-5 backdrop-blur-sm">
+                <header class="mb-6">
+                    <h2 class="text-2xl md:text-3xl font-semibold text-white">Project Notes</h2>
+                    <p class="text-slate-400 text-sm mt-1">{{ $project->notes->count() }} note{{ $project->notes->count() === 1 ? '' : 's' }}</p>
+                </header>
+
+                <div class="space-y-8">
+                    @foreach($project->notes as $note)
+                        <section class="border border-slate-700/40 rounded-xl p-5 bg-slate-900/30">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <div class="flex items-center gap-3">
+                                    <h3 class="text-lg font-semibold text-white">{{ $note->title }}</h3>
+                                    <span class="text-xs px-2 py-0.5 rounded-full border border-slate-600/60 text-slate-300 uppercase tracking-wide">
+                                        {{ ucfirst($note->type) }}
+                                    </span>
+                                </div>
+                                <div class="text-xs text-slate-500">Updated {{ $note->updated_at?->diffForHumans() }}</div>
+                            </div>
+
+                            @if($note->tags && $note->tags->count() > 0)
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    @foreach($note->tags as $tag)
+                                        <span class="tag" style="border-color: {{ $tag->color }}20; background-color: {{ $tag->color }}10;">
+                                            <span class="w-2 h-2 rounded-full mr-2" style="background-color: {{ $tag->color }};"></span>
+                                            {{ $tag->name }}
+                                        </span>
+                                    @endforeach
+                                </div>
+                            @endif
+
+                            <div class="prose prose-invert max-w-none mt-4">
+                                @if(in_array($note->type, ['markdown', 'mixed']))
+                                    @if(!empty($note->content))
+                                        {!! \Illuminate\Support\Str::markdown($note->content) !!}
+                                    @endif
+                                @endif
+
+                                @if(in_array($note->type, ['code', 'mixed']))
+                                    @if(!empty($note->code_content))
+                                        <pre><code class="language-php">{{ $note->code_content }}</code></pre>
+                                    @endif
+                                @endif
+                            </div>
+                        </section>
+                    @endforeach
+                </div>
+            </article>
+        @endif
+
         <!-- Footer Actions -->
         <div class="flex justify-between items-center mt-12 fade-up stagger-4">
-            <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}" 
+            <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-600 text-slate-200 hover:bg-slate-800/40 transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>

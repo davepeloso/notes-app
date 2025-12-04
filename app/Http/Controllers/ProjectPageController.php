@@ -12,7 +12,12 @@ class ProjectPageController extends Controller
      */
     public function show(string $slug): View
     {
-        $projectPage = ProjectPage::with('project.tags')
+        $projectPage = ProjectPage::with([
+                'project.tags',
+                // Eager-load notes (latest first) and their tags for display on the page
+                'project.notes' => fn ($q) => $q->latest(),
+                'project.notes.tags',
+            ])
             ->where('slug', $slug)
             ->where('is_published', true)
             ->firstOrFail();
