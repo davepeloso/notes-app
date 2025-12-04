@@ -330,7 +330,7 @@
             }
 
             .markdown-editor-panel.preview-panel {
-                background-color: rgba(0, 255, 255, 0.3);
+                background-color: rgba(0, 196, 255, 0.09);
             }
 
             .markdown-textarea,

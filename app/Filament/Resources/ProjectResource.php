@@ -62,7 +62,7 @@ class ProjectResource extends Resource
                     ->since(),
             ])
             ->filters([])
-            ->actions([
+            ->recordActions([
                 ManageProjectPageAction::viewPageAction(),
                 ManageProjectPageAction::make(),
                 ManageProjectPageAction::deletePageAction(),

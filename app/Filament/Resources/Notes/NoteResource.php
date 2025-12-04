@@ -161,7 +161,7 @@ class NoteResource extends Resource
                     ->relationship('tags', 'name')
                     ->multiple(),
             ])
-            ->actions([
+            ->recordActions([
                 Actions\Action::make('edit')
                     ->url(fn ($record) => static::getUrl('edit', ['record' => $record]))
                     ->icon('heroicon-o-pencil'),

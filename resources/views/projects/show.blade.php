@@ -30,7 +30,7 @@
 
         .gradient-border {
             position: relative;
-            background: linear-gradient(135deg, rgba(94, 163, 255, 0.1), rgba(107, 176, 255, 0.05));
+            background: white;
             border: 1px solid rgba(148, 163, 184, 0.3);
         }
 
@@ -72,6 +72,55 @@
         /* Tag styles */
         .tag {
             @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-800/50 text-slate-300 border border-slate-700/40;
+        }
+
+        /* Article text styles - unified to white/dark for contrast */
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, rgba(94, 163, 255, 0.1), rgba(107, 176, 255, 0.05));
+            border: 1px solid rgba(148, 163, 184, 0.3);
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(94, 163, 255, 0.4), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .gradient-border:hover::before {
+            opacity: 1;
+        }
+
+        /* Article text styles - unified to white for dark background */
+        .gradient-border h1,
+        .gradient-border h2,
+        .gradient-border h3,
+        .gradient-border h4,
+        .gradient-border h5,
+        .gradient-border h6 {
+            color: white !important;
+        }
+
+        .gradient-border p:not(.text),
+        .gradient-border .text-slate-200,
+        .gradient-border .text-slate-300,
+        .gradient-border .text-slate-400,
+        .gradient-border .text-slate-500 {
+            color: white !important;
+        }
+
+        /* Keep p.text as requested */
+        .gradient-border p.text {
+            color: inherit;
         }
     </style>
 </head>
@@ -239,7 +288,7 @@
         <!-- Footer Actions -->
         <div class="flex justify-between items-center mt-12 fade-up stagger-4">
             <a href="{{ url('/admin/projects/' . $project->id . '/edit') }}"
-               class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-600 text-slate-200 hover:bg-slate-800/40 transition-all">
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-slate-600 text-slate-200 hover:bg-slate-800/40 transition-all">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                 </svg>

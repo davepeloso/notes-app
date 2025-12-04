@@ -22,7 +22,7 @@ class ManageProjectPageAction
             ->color(fn ($record) => $record->page ? 'warning' : 'success')
             ->form(function ($record) {
                 $page = $record->page;
-                
+
                 return [
                     TextInput::make('slug')
                         ->label('Page URL Slug')
@@ -30,17 +30,17 @@ class ManageProjectPageAction
                         ->default($page?->slug ?? ProjectPage::generateSlug($record->name))
                         ->helperText('URL-friendly identifier (e.g., my-project-name)')
                         ->rules(['alpha_dash', 'max:255']),
-                    
+
                     Toggle::make('is_published')
                         ->label('Published')
                         ->default($page?->is_published ?? true)
                         ->helperText('Toggle to show/hide this project page publicly'),
-                    
+
                     Textarea::make('custom_content')
                         ->label('Custom Content (Optional)')
                         ->default($page?->custom_content)
                         ->helperText('Override the README/description with custom markdown')
-                        ->rows(6),
+                        ->rows(12),
                 ];
             })
             ->action(function ($record, array $data) {
@@ -55,7 +55,7 @@ class ManageProjectPageAction
                         ->danger()
                         ->body('Please choose a different URL slug.')
                         ->send();
-                    
+
                     return;
                 }
 
@@ -79,7 +79,7 @@ class ManageProjectPageAction
                     ->send();
             })
             ->modalHeading(fn ($record) => $record->page ? 'Edit Project Page' : 'Create Project Page')
-            ->modalWidth('2xl');
+            ->modalWidth('4xl');
     }
 
     /**
@@ -108,7 +108,7 @@ class ManageProjectPageAction
             ->requiresConfirmation()
             ->action(function ($record) {
                 $record->page()->delete();
-                
+
                 Notification::make()
                     ->title('Project page deleted')
                     ->success()

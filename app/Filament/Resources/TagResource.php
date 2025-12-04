@@ -68,7 +68,7 @@ class TagResource extends Resource
                     ->trueLabel('Flags only')
                     ->falseLabel('Regular tags only'),
             ])
-            ->actions([
+            ->recordActions([
                 Actions\Action::make('edit')
                     ->url(fn ($record) => static::getUrl('edit', ['record' => $record]))
                     ->icon('heroicon-o-pencil'),
