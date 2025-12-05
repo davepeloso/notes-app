@@ -1,4 +1,5 @@
 http://notes.test/admin/notes/25/edit ### Why this works
+in Filament v4, the Grid component is in the namespace, not . Looking at your NoteResource file, I can see the correct import pattern. Let me fix your ProjectResource form schema: `Filament\Schemas\Components``Filament\Forms\Components`
 
 ### What I changed
 - Fixed the offending Relation Manager form and aligned it with v4.

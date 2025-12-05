@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Pages\ProjectResource;
 
+use App\Filament\Actions\ManageProjectPageAction;
 use App\Filament\Resources\ProjectResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
@@ -13,6 +14,7 @@ class EditProject extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
+            ManageProjectPageAction::viewPageAction(),
             Actions\DeleteAction::make(),
         ];
     }

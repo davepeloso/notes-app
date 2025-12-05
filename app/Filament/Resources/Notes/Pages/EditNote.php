@@ -19,6 +19,14 @@ class EditNote extends EditRecord
                 ->color('success')
                 ->action('save'),
 
+            Action::make('projectPage')
+                ->label('Project Page')
+                ->color('primary')
+                ->icon('heroicon-o-link')
+                ->url(fn () => $this->record?->project?->page?->url)
+                ->openUrlInNewTab()
+                ->visible(fn () => $this->record && $this->record->project && $this->record->project->page && $this->record->project->page->is_published),
+
             Action::make('code')
                 ->label('Code')
                 ->color('info')

@@ -7,6 +7,7 @@ use App\Models\Project;
 use BackedEnum;
 use Filament\Actions;
 use Filament\Forms\Components as FormComponents;
+use Filament\Schemas\Components as SchemaComponents;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables;
@@ -24,16 +25,20 @@ class ProjectResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->schema([
-            FormComponents\TextInput::make('name')
-                ->required()
-                ->maxLength(255),
+            SchemaComponents\Grid::make(2)
+                ->schema([
+                    FormComponents\TextInput::make('name')
+                        ->required()
+                        ->maxLength(255),
+
+                    FormComponents\ColorPicker::make('color')
+                        ->default('#3b82f6'),
+                ]),
 
             FormComponents\Textarea::make('description')
                 ->maxLength(65535)
-                ->rows(3),
-
-            FormComponents\ColorPicker::make('color')
-                ->default('#3b82f6'),
+                ->rows(4)
+                ->columnSpanFull(),
         ]);
     }
 
@@ -68,13 +73,14 @@ class ProjectResource extends Resource
                 ManageProjectPageAction::deletePageAction(),
                 Actions\EditAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 Actions\BulkAction::make('delete')
                     ->requiresConfirmation()
                     ->action(fn ($records) => $records->each->delete())
                     ->icon('heroicon-o-trash')
                     ->color('danger'),
-            ]);
+            ])
+            ->toolbarActions([]);
     }
 
     public static function getPages(): array
