@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,122 +7,47 @@
     <title>{{ $project->name }} - Project</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
-        /* Custom animations and styles inspired by the template */
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        /* Base font and link colors for dark background */
+        html { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; color: #e5e7eb; }
+        a { color: #60a5fa; }
+        a:hover { color: #93c5fd; }
 
-        .fade-up {
-            animation: fadeUp 0.6s ease-out forwards;
-        }
+        /* Prevent long words / URLs from running off the page */
+        .prose, .gradient-border, .content-wrap { overflow-wrap: anywhere; word-wrap: break-word; word-break: break-word; }
 
+        /* Animations */
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-up { animation: fadeUp 0.6s ease-out forwards; }
         .stagger-1 { animation-delay: 0.1s; opacity: 0; }
         .stagger-2 { animation-delay: 0.2s; opacity: 0; }
         .stagger-3 { animation-delay: 0.3s; opacity: 0; }
         .stagger-4 { animation-delay: 0.4s; opacity: 0; }
         .stagger-5 { animation-delay: 0.5s; opacity: 0; }
 
-        .gradient-border {
-            position: relative;
-            background: white;
-            border: 1px solid rgba(148, 163, 184, 0.3);
-        }
+        /* Card with subtle gradient border */
+        .gradient-border { position: relative; background: linear-gradient(135deg, rgba(94, 163, 255, 0.1), rgba(107, 176, 255, 0.05)); border: 1px solid rgba(148, 163, 184, 0.3); }
+        .gradient-border::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(135deg, rgba(94, 163, 255, 0.4), transparent); opacity: 0; transition: opacity 0.3s; }
 
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(94, 163, 255, 0.4), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+        /* Force headings to be light for contrast within cards */
+        .gradient-border h1, .gradient-border h2, .gradient-border h3, .gradient-border h4, .gradient-border h5, .gradient-border h6 { color: #fff; }
 
-        .gradient-border:hover::before {
-            opacity: 1;
-        }
+        /* Markdown content styling (plain CSS instead of Tailwind @apply) */
+        .prose { max-width: 65ch; }
+        .prose h1 { font-size: 1.875rem; line-height: 2.25rem; font-weight: 700; color: #fff; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose h2 { font-size: 1.5rem; line-height: 2rem; font-weight: 600; color: #fff; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .prose h3 { font-size: 1.25rem; line-height: 1.75rem; font-weight: 500; color: #fff; margin-top: 1rem; margin-bottom: 0.5rem; }
+        .prose p { color: #cbd5e1; margin: 0.75rem 0; line-height: 1.625; }
+        .prose code { background: rgba(30,41,59,0.5); padding: 0.25rem 0.5rem; border-radius: 0.375rem; color: #93c5fd; font-size: 0.875rem; }
+        .prose pre { background: rgba(2,6,23,0.5); padding: 1rem; border-radius: 0.5rem; overflow-x: auto; margin: 1rem 0; border: 1px solid rgba(51,65,85,0.4); }
+        .prose pre code { background: transparent; padding: 0; }
+        .prose ul { list-style: disc inside; color: #cbd5e1; margin: 0.75rem 0; }
+        .prose ol { list-style: decimal inside; color: #cbd5e1; margin: 0.75rem 0; }
+        .prose a { color: #60a5fa; text-decoration: underline; }
+        .prose a:hover { color: #93c5fd; }
+        .prose blockquote { border-left: 4px solid #475569; padding-left: 1rem; font-style: italic; color: #94a3b8; margin: 1rem 0; }
 
-        /* Markdown content styling */
-        .prose {
-            max-width: 65ch;
-        }
-
-        .prose h1 { @apply text-3xl font-bold text-white mt-8 mb-4; }
-        .prose h2 { @apply text-2xl font-semibold text-white mt-6 mb-3; }
-        .prose h3 { @apply text-xl font-medium text-white mt-4 mb-2; }
-        .prose p { @apply text-slate-300 my-3 leading-relaxed; }
-        .prose code { @apply bg-slate-800/50 px-2 py-1 rounded text-blue-300 text-sm; }
-        .prose pre { @apply bg-slate-900/50 p-4 rounded-lg overflow-x-auto my-4 border border-slate-700/40; }
-        .prose pre code { @apply bg-transparent p-0; }
-        .prose ul { @apply list-disc list-inside text-slate-300 my-3 space-y-1; }
-        .prose ol { @apply list-decimal list-inside text-slate-300 my-3 space-y-1; }
-        .prose a { @apply text-blue-400 hover:text-blue-300 underline; }
-        .prose blockquote { @apply border-l-4 border-slate-600 pl-4 italic text-slate-400 my-4; }
-
-        /* Tag styles */
-        .tag {
-            @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-800/50 text-slate-300 border border-slate-700/40;
-        }
-
-        /* Article text styles - unified to white/dark for contrast */
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(135deg, rgba(94, 163, 255, 0.1), rgba(107, 176, 255, 0.05));
-            border: 1px solid rgba(148, 163, 184, 0.3);
-        }
-
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(94, 163, 255, 0.4), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask-composite: exclude;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-
-        .gradient-border:hover::before {
-            opacity: 1;
-        }
-
-        /* Article text styles - unified to white for dark background */
-        .gradient-border h1,
-        .gradient-border h2,
-        .gradient-border h3,
-        .gradient-border h4,
-        .gradient-border h5,
-        .gradient-border h6 {
-            color: white !important;
-        }
-
-        .gradient-border p:not(.text),
-        .gradient-border .text-slate-200,
-        .gradient-border .text-slate-300,
-        .gradient-border .text-slate-400,
-        .gradient-border .text-slate-500 {
-            color: white !important;
-        }
-
-        /* Keep p.text as requested */
-        .gradient-border p.text {
-            color: inherit;
-        }
+        /* Tag pill */
+        .tag { display: inline-flex; align-items: center; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; background: rgba(30,41,59,0.5); color: #cbd5e1; border: 1px solid rgba(51,65,85,0.4); }
     </style>
 </head>
 <body class="min-h-screen w-full relative overflow-x-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
